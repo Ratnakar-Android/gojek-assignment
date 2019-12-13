@@ -23,14 +23,13 @@ class GitHubMainFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
             dataBinding = DataBindingUtil.inflate(inflater, R.layout.github_fragment, container, false)
 
-            recleyerView = dataBinding.github_recycler
+            recleyerView = dataBinding.githubRecycler
             recleyerView.setAdapter(adapter)
 
         return dataBinding.root
