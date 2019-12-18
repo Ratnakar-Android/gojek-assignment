@@ -6,7 +6,6 @@ import com.github.listener.ApiResponseListener
 
 class GitHubRepository (val gitHubApiContract: GitHubApiContract) : GitHubApiContract   {
 
-
     companion object {
         @JvmStatic
         @Volatile
@@ -23,6 +22,7 @@ class GitHubRepository (val gitHubApiContract: GitHubApiContract) : GitHubApiCon
 
     override fun callGitHubApi(onApiSuccess: ApiResponseListener, handleErrorCode: ApiResponseListener) {
         gitHubApiContract.callGitHubApi(onApiSuccess, handleErrorCode)
+
     }
 
 

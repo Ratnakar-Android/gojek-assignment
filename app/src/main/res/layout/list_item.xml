@@ -5,12 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
-        <import type="com.github.models.GitHubItem" />
-
-<!--        <variable-->
-<!--            name="news"-->
-<!--            type="com.news.models.Article" />-->
+        <variable
+            name="github"
+            type="com.github.models.GitHubModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,45 +15,47 @@
         android:layout_height="wrap_content"
         android:background="?selectableItemBackground"
         android:paddingStart="@dimen/rv_horizontal_offset"
-        android:paddingTop="@dimen/rv_vertical_offset"
+        android:paddingTop="15dp"
         android:paddingEnd="@dimen/rv_horizontal_offset"
-        android:paddingBottom="@dimen/rv_vertical_offset"
-        tools:context="com.news.ui.MainActivity">
+        android:paddingBottom="15dp"
+        >
 
         <TextView
-            android:id="@+id/text1"
+            android:id="@+id/author"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:minLines="3"
-            android:text="@{news.title}"
+            android:layout_marginStart="15dp"
+            android:text="@{github.author}"
             android:textColor="@color/colorTextSecondary"
             android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@id/image1"
+            app:layout_constraintStart_toEndOf="@id/profile_image"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/image1"
-            tools:text="Ratnakar" />
+            app:layout_constraintTop_toTopOf="@id/profile_image"
+            tools:text="Author" />
 
-        <ImageView
-            android:id="@+id/image1"
-            android:layout_width="82dp"
-            android:layout_height="82dp"
-            android:src="@color/cardBackground"
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/profile_image"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            bind:imageUrl="@{github.avatar}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:articleUrl="@{news.url}"
-            bind:url="@{news.urlToImage}" />
+            app:civ_border_color="#FF000000"/>
 
         <TextView
-            android:id="@+id/text3"
+            android:id="@+id/author_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:text="@{github.name}"
             android:textColor="@color/colorPrimaryLight"
             android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="@id/text1"
-            app:layout_constraintTop_toBottomOf="@id/text1"
-            tools:text="hello" />
+            android:layout_marginTop="5dp"
+            app:layout_constraintStart_toStartOf="@id/author"
+            app:layout_constraintTop_toBottomOf="@id/author"
+            tools:text="author name" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

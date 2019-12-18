@@ -1,36 +1,49 @@
 package net.one97.paytm.hotel4.view.adapter
 
-import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.github.R
 import com.github.databinding.ListItemBinding
-import net.one97.paytm.hotel4.viewmodel.GitHubListItemViewModel
+import com.github.models.GitHubModel
 
-class GitHubAdapter(mContext: Context?,val viewmodel: GitHubListItemViewModel): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class GitHubAdapter: RecyclerView.Adapter<GitHubAdapter.GitHubViewHolder>() {
 
-      lateinit var layoutInflater:LayoutInflater
-      lateinit var binding: ListItemBinding
+    var gitHubItemList: List<GitHubModel>? = null
 
-
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        TODO("not implemented") //To change body of created funxctions use File | Settings | File Templates.
-        if (layoutInflater == null) {
-            layoutInflater = LayoutInflater.from(parent.getContext());
-        }
-         binding =  DataBindingUtil.inflate(layoutInflater, R.layout.list_item, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GitHubViewHolder {
+         var layoutInflater : LayoutInflater = LayoutInflater.from(parent.getContext());
+         var binding : ListItemBinding =  DataBindingUtil.inflate(layoutInflater, R.layout.list_item, parent, false)
+        return GitHubViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return if (gitHubItemList == null) 0 else gitHubItemList !!.size
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onBindViewHolder(gitHubViewHolder: GitHubViewHolder, position: Int) {
+        gitHubViewHolder.binding.github = gitHubItemList?.get(position)
+        gitHubViewHolder.binding.executePendingBindings()
+    }
 
+
+    fun setData(gitHubItemList: List<GitHubModel>) {
+        this.gitHubItemList = gitHubItemList
+        notifyDataSetChanged()
+    }
+
+     class GitHubViewHolder(var binding: ListItemBinding) : RecyclerView.ViewHolder(binding.getRoot()), View.OnClickListener {
+        init {
+            this.binding = binding
+        }
+
+        override fun onClick(v: View) {
+           // val index = this.adapterPosition
+            //listener.onNewsItemClicked(articles.get(index))
+        }
     }
 }
 
@@ -38,6 +51,6 @@ class GitHubAdapter(mContext: Context?,val viewmodel: GitHubListItemViewModel): 
 
 
 
-}
+
 
 

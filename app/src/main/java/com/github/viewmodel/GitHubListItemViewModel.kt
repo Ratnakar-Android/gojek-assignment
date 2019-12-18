@@ -1,40 +1,36 @@
-package net.one97.paytm.hotel4.viewmodel
-
-import android.view.View
+package com.github.viewmodel
+import android.util.Log
 import androidx.annotation.Nullable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.listener.ApiResponseListener
 import com.github.models.GitHubItem
+import com.github.models.GitHubModel
 import com.github.repository.GitHubRepository
 
-class GitHubListItemViewModel(@Nullable private var mRepo: GitHubRepository) : ViewModel(), ApiResponseListener {
+ class GitHubListItemViewModel(@Nullable private var mRepo: GitHubRepository) : ViewModel(), ApiResponseListener {
 
 
-    private var gitHubList: MutableLiveData<GitHubItem>
+     var gitHubList: MutableLiveData<List<GitHubModel>>
 
    init {
        gitHubList = MutableLiveData()
    }
 
     // Call Api for fetching Git top listed items
+
     fun fetchTopListedItems(){
-
         mRepo.callGitHubApi(this, this)
-
-
-
     }
 
-    fun getGitHubList() : LiveData<GitHubItem> = gitHubList
+    fun getGitHubList() : LiveData <List<GitHubModel>> = gitHubList
 
 
-    override fun onApiSuccess(itemList: GitHubItem) {
+    override fun onApiSuccess(itemList: List<GitHubModel>?) {
+
         if (itemList != null){
-            if (itemList is GitHubItem){
-                gitHubList.postValue(itemList)
-            }
+            gitHubList.postValue(itemList)
         }
     }
 

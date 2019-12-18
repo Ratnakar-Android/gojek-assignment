@@ -9,28 +9,20 @@ import com.github.databinding.GithubActivityBinding
 import com.github.ui.fraggment.GitHubMainFragment
 
 class GitHubAppMainActivity : AppCompatActivity() {
+    private val fragmentManager = supportFragmentManager
+    var binding: GithubActivityBinding ? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var binding : GithubActivityBinding = DataBindingUtil.setContentView(this, R.layout.github_activity)
+        binding  = DataBindingUtil.setContentView(this, R.layout.github_activity)
+
         var fragment: Fragment? = null
         if (fragment == null)
             fragment = GitHubMainFragment()
 
+        fragmentManager.beginTransaction().add(R.id.fragment_container, fragment).commitAllowingStateLoss()
     }
-
-    private fun showFragment(fragment: Fragment, addToBackStack: Boolean, tag: String) {
-
-        val manager = supportFragmentManager
-        val ft = manager.beginTransaction()
-        if (addToBackStack) {
-            ft.addToBackStack(tag)
-        }
-
-            ft.replace(R.id.fragment_container, fragment, tag)
-            ft.commitAllowingStateLoss()
-        }
     }
 
 
-}
+
