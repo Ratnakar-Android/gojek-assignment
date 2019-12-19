@@ -14,14 +14,14 @@ import com.github.databinding.GithubFragmentBinding
 import net.one97.paytm.hotel4.view.adapter.GitHubAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.github.R
-import com.github.datastore.remote.RemoteDataSource
+import com.github.data.GitHubApiClient
 import com.github.models.GitHubModel
 import com.github.repository.GitHubRepository
 import com.github.viewmodel.GitHubListItemViewModel
 import com.travel.train.viewModel.ViewModelFactory
 
 
-class GitHubMainFragment : Fragment() {
+class GitHubFragment : Fragment() {
 
     lateinit var dataBinding:GithubFragmentBinding
     var adapter : GitHubAdapter? = GitHubAdapter()
@@ -40,9 +40,10 @@ class GitHubMainFragment : Fragment() {
             recleyerView.addItemDecoration(divider)
         }
 
-        val viewModelFactory = ViewModelFactory(GitHubRepository.getInstance(RemoteDataSource.getInstance(context)))
+        val viewModelFactory = ViewModelFactory(GitHubRepository.getInstance(GitHubApiClient.getInstance(context)))
         var mViewModel = ViewModelProviders.of(this, viewModelFactory).get(GitHubListItemViewModel::class.java)
         dataBinding.shimmerViewContainer.startShimmerAnimation()
+
         mViewModel.fetchTopListedItems()
 
         mViewModel.getGitHubList().observe(this, object : Observer<List<GitHubModel>> {
@@ -56,6 +57,10 @@ class GitHubMainFragment : Fragment() {
         })
         return dataBinding.root
     }
+
+
+
+
 
 }
 

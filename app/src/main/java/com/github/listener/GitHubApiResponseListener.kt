@@ -2,7 +2,7 @@ package com.github.listener
 
 import com.github.models.GitHubModel
 
-interface ApiResponseListener {
+interface GitHubApiResponseListener {
     fun onApiSuccess(list: List<GitHubModel>?)
     fun OnApiError()
 }

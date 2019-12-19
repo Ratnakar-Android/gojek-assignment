@@ -1,10 +1,9 @@
 package com.github.repository
 
-import com.github.contarct.GitHubApiContract
-import com.github.datastore.remote.RemoteDataSource
-import com.github.listener.ApiResponseListener
+import com.github.listener.GitHubApiContract
+import com.github.listener.GitHubApiResponseListener
 
-class GitHubRepository (val gitHubApiContract: GitHubApiContract) : GitHubApiContract   {
+class GitHubRepository(val gitHubApiContract: GitHubApiContract) : GitHubApiContract {
 
     companion object {
         @JvmStatic
@@ -17,13 +16,9 @@ class GitHubRepository (val gitHubApiContract: GitHubApiContract) : GitHubApiCon
                 GitHubRepository(gitHubApiContract).also { INSTANCE = it }
             }
         }
-
     }
 
-    override fun callGitHubApi(onApiSuccess: ApiResponseListener, handleErrorCode: ApiResponseListener) {
+    override fun callGitHubApi(onApiSuccess: GitHubApiResponseListener, handleErrorCode: GitHubApiResponseListener) {
         gitHubApiContract.callGitHubApi(onApiSuccess, handleErrorCode)
-
     }
-
-
 }

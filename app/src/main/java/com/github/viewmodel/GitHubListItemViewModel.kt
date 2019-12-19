@@ -1,15 +1,13 @@
 package com.github.viewmodel
-import android.util.Log
 import androidx.annotation.Nullable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.github.listener.ApiResponseListener
-import com.github.models.GitHubItem
+import com.github.listener.GitHubApiResponseListener
 import com.github.models.GitHubModel
 import com.github.repository.GitHubRepository
 
- class GitHubListItemViewModel(@Nullable private var mRepo: GitHubRepository) : ViewModel(), ApiResponseListener {
+ class GitHubListItemViewModel(@Nullable private var mRepo: GitHubRepository) : ViewModel(), GitHubApiResponseListener {
 
 
      var gitHubList: MutableLiveData<List<GitHubModel>>
